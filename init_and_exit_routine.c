@@ -5,7 +5,7 @@ uint32_t get_magic_number_ELF(Elf64_Ehdr *ehdr) {
 	return magic_number;
 }
 
-void check_magic_number(uint32_t magic_number) {
+void verify_magic_number(uint32_t magic_number) {
 	switch (magic_number) {
 		case 0x7f454c46:
 		case 0x464c457f:
@@ -25,6 +25,11 @@ void unmap_file(void *p_void, off_t size) {
 	}
 }
 
+void unmap_file_and_exit_with_failure(void *p_void, off_t size) {
+	unmap_file(p_void, size);
+	exit(EXIT_FAILURE);
+}
+
 void map_file_to_memory(int fd, struct stat *st, void **ptr) {
 	if ((*ptr = mmap(NULL, (*st).st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED) {
 		printf("Error: could not map file\n");
@@ -33,7 +38,7 @@ void map_file_to_memory(int fd, struct stat *st, void **ptr) {
 	}
 }
 
-void check_fstat(int fd, struct stat *st) {
+void get_file_stat(int fd, struct stat *st) {
 	if (fstat(fd, st) == -1) {
 		printf("Error: could not get file stats\n");
 		perror("fstat");
@@ -41,7 +46,7 @@ void check_fstat(int fd, struct stat *st) {
 	}
 }
 
-int try_open(char *string) {
+int open_file(char *string) {
 	int fd = open(string, O_RDONLY);
 	if (fd == -1) {
 		printf("Error: could not open file %s\n", string);
@@ -51,9 +56,10 @@ int try_open(char *string) {
 	return fd;
 }
 
-void check_args(int argc) {
+void check_arguments(int argc, char **argv) {
 	if (argc < 2) {
 		printf("Usage: ft_nm <binary>\n");
 		exit(EXIT_FAILURE);
 	}
+	check_flags(argc, argv);
 }

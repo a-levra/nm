@@ -5,3 +5,4 @@ x86
 cmake-build-debug
 cmake-build-release
 .idea
+test.sh

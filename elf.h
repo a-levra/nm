@@ -468,6 +468,7 @@ typedef struct
 	unsigned char	st_other;		/* Symbol visibility */
 	Elf32_Section	st_shndx;		/* Section index */
 } Elf32_Sym;
+
 typedef struct
 {
 	Elf64_Word	st_name;		/* Symbol name (string tbl index) */
