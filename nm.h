@@ -46,7 +46,7 @@ unsigned char get_symbol_letter(Elf64_Sym symbol, Elf64_Shdr *shdr);
 Elf64_Shdr* get_section_headers_table(Elf64_Ehdr *ehdr);
 Elf64_Shdr* find_section_by_type(Elf64_Shdr *shdrtab, uint16_t shnum, uint32_t type);
 Elf64_Shdr *get_symbol_table(Elf64_Shdr *shdrtab, Elf64_Ehdr *ehdr);
-int should_skip_symbol(const char *symbol_name, const char letter, Elf64_Sym symbol);
+int should_skip_symbol(const char *symbol_name, Elf64_Sym symbol);
 void check_ELF_file_integrity(void *binary_pointer, off_t size);
 void check_symtab_integrity(const Elf64_Ehdr *elf_header,
 							const Elf64_Shdr *section_headers,
@@ -63,5 +63,10 @@ void print_btree(t_btree *node, Elf64_Shdr *sdhdrtab);
 //exit routine
 void unmap_file(void *p_void, off_t size);
 void unmap_file_and_exit_with_failure(void *p_void, off_t size);
+
+// utils
+void ft_bzero(void *s, size_t n);
+int ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t ft_strlen(const char *s);
 
 #endif //UNTITLED__NM_H_

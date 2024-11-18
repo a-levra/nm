@@ -1,7 +1,7 @@
 #include "nm.h"
 t_btree *g_master_node = NULL;
-char *symtab_strtab_p = NULL;
-Elf64_Sym *sym_array = NULL;
+//char *symtab_strtab_p = NULL;
+//Elf64_Sym *sym_array = NULL;
 
 void insert_in_btree(t_btree **child_node, t_btree *parent_node, unsigned long long sym_entry_index){
 	if (!*child_node)
@@ -35,7 +35,7 @@ void free_btrees(t_btree *node) {
 int compare_symtab_entries(unsigned long long index1, unsigned long long index2) {
 	const char *name1 = symtab_strtab_ptr + symbol_array[index1].st_name;
 	const char *name2 = symtab_strtab_ptr + symbol_array[index2].st_name;
-	return strncmp(name1, name2, 100) * (G_FLAGS[REVERSE_ORDER_FLAG] ? -1 : 1);
+	return ft_strncmp(name1, name2, 100) * (G_FLAGS[REVERSE_ORDER_FLAG] ? -1 : 1);
 }
 
 void cmp_and_insert_in_btree(unsigned long long sym_entry_index, t_btree *node) {
@@ -52,8 +52,3 @@ t_btree *sort_symbols_with_btree(unsigned long long number_of_symbols) {
 	return g_master_node;
 }
 
-//void ft_bzero(void *s, size_t n) {
-//	unsigned char *p = s;
-//	while (n--)
-//		*p++ = 0;
-//}

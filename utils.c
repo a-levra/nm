@@ -63,3 +63,38 @@ void check_arguments(int argc, char **argv) {
 	}
 	check_flags(argc, argv);
 }
+
+Elf64_Shdr *get_section_headers_table(Elf64_Ehdr *elf_header) {
+	return (Elf64_Shdr *) ((char *) elf_header + elf_header->e_shoff);
+}
+
+void ft_bzero(void *s, size_t n) {
+	unsigned char *p = s;
+	while (n--)
+		*p++ = 0;
+}
+
+int ft_strncmp(const char *s1, const char *s2, size_t n) {
+	unsigned char *p1 = (unsigned char *) s1;
+	unsigned char *p2 = (unsigned char *) s2;
+	while (n--) {
+		if (*p1 != *p2) {
+			return *p1 - *p2;
+		}
+		if (*p1 == '\0') {
+			return 0;
+		}
+		++p1;
+		++p2;
+	}
+	return 0;
+}
+
+size_t ft_strlen(const char *s) {
+	size_t len = 0;
+	while (s[len]) {
+		++len;
+	}
+	return len;
+}
+
