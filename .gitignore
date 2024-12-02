@@ -1,7 +1,7 @@
 *.o
 CMakeLists.txt
 a.out
-test_files
+test_res
 cmake-build-debug
 cmake-build-release
 .idea

@@ -38,12 +38,12 @@ void check_flags(int argc, char **argv) {
 
 void check_flag_conformity(int argc, char **argv) {
 	if (argc < 2) {
-		printf("Usage: ft_nm <binary>\n");
+		printf("Usage: ft_nm [-agurp] <binary>\n");
 		exit(EXIT_FAILURE);
 	}
 	//last argument must not be a flag
 	if (argv[argc - 1][0] == '-') {
-		printf("Usage: ft_nm <binary>\n");
+		printf("Usage: ft_nm [-agurp] <binary>\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -51,7 +51,7 @@ void check_flag_conformity(int argc, char **argv) {
 	if (argc > 2) {
 		for (int i = 1; i < argc - 1; ++i) {
 			if (argv[i][0] != '-') {
-				printf("Usage: ft_nm <binary>\n");
+				printf("Usage: ft_nm [-agurp] <binary>\n");
 				exit(EXIT_FAILURE);
 			}
 		}

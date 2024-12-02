@@ -25,13 +25,13 @@ int main(int argc, char **argv) {
 }
 
 void check_ELF_file_integrity(void *binary_pointer, off_t size) {
-	if (size < sizeof(Elf64_Ehdr)) {
+	if ((unsigned long) size < sizeof(Elf64_Ehdr)) {
 		fprintf(stderr, "Error: file is too small to be a valid ELF file\n");
 		unmap_file_and_exit_with_failure((void *) binary_pointer, size);
 	}
 	Elf64_Ehdr *elf_header = (Elf64_Ehdr *) binary_pointer;
 	verify_magic_number(get_magic_number_ELF(elf_header));
-	if (elf_header->e_shoff + elf_header->e_shnum * sizeof(Elf64_Shdr) > size) {
+	if (elf_header->e_shoff + elf_header->e_shnum * sizeof(Elf64_Shdr) > (unsigned long) size) {
 		fprintf(stderr, "Error: section headers table is out of bounds\n");
 		unmap_file_and_exit_with_failure((void *) elf_header, sizeof(Elf64_Ehdr));
 	}
@@ -41,7 +41,6 @@ void check_ELF_file_integrity(void *binary_pointer, off_t size) {
 	}
 
 }
-
 
 Elf64_Shdr *get_symbol_table(Elf64_Shdr *section_headers, Elf64_Ehdr *elf_header) {
 	return find_section_by_type(section_headers, elf_header->e_shnum, SHT_SYMTAB);

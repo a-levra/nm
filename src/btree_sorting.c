@@ -1,9 +1,8 @@
 #include "nm.h"
-t_btree *g_master_node = NULL;
-//char *symtab_strtab_p = NULL;
-//Elf64_Sym *sym_array = NULL;
 
-void insert_in_btree(t_btree **child_node, t_btree *parent_node, unsigned long long sym_entry_index){
+t_btree *g_master_node = NULL;
+
+void insert_in_btree(t_btree **child_node, unsigned long long sym_entry_index) {
 	if (!*child_node)
 	{
 		create_node(child_node);
@@ -40,9 +39,9 @@ int compare_symtab_entries(unsigned long long index1, unsigned long long index2)
 
 void cmp_and_insert_in_btree(unsigned long long sym_entry_index, t_btree *node) {
 	if (compare_symtab_entries(node->index, sym_entry_index) < 0)
-		insert_in_btree(&(node->right), node, sym_entry_index);
+		insert_in_btree(&(node->right), sym_entry_index);
 	else
-		insert_in_btree(&(node->left), node, sym_entry_index);
+		insert_in_btree(&(node->left), sym_entry_index);
 }
 
 t_btree *sort_symbols_with_btree(unsigned long long number_of_symbols) {
