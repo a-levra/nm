@@ -12,13 +12,18 @@ int main(int argc, char **argv) {
 	struct stat file_stat;
 	void *binary_pointer;
 
+	puts("check_arguments");
 	check_arguments(argc, argv);
-
+	puts("open_file");
 	file_descriptor = open_file(argv[argc - 1]);
+	puts("get_file_stat");
 	get_file_stat(file_descriptor, &file_stat);
+	puts("map_file_to_memory");
 	map_file_to_memory(file_descriptor, &file_stat, &binary_pointer);
 	close(file_descriptor);
+	puts("check_ELF_file_integrity");
 	check_ELF_file_integrity(binary_pointer, file_stat.st_size);
+	puts("name_mangling");
 	name_mangling(binary_pointer);
 	unmap_file(binary_pointer, file_stat.st_size);
 	exit(EXIT_SUCCESS);

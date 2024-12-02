@@ -5,12 +5,18 @@ void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index);
 
 void name_mangling(void *binary_pointer) {
 	Elf64_Ehdr *elf_header = (Elf64_Ehdr *) binary_pointer;
+	puts("get_section_headers_table");
 	Elf64_Shdr *section_headers_table = get_section_headers_table(elf_header);
+	puts("check_section_headers_table_integrity");
 	check_section_headers_table_integrity(elf_header, section_headers_table);
+	puts("get_symbol_table");
 	Elf64_Shdr *symbol_table = get_symbol_table(section_headers_table, elf_header);
-
+	puts("check_symtab_integrity");
 	check_symtab_integrity(elf_header, section_headers_table, symbol_table);
+	puts("display_symbol_table");
 	display_symbol_table(elf_header, section_headers_table, symbol_table);
+	puts("end");
+
 }
 
 void check_section_headers_table_integrity(Elf64_Ehdr *ELF_header, Elf64_Shdr *section_header_table) {
@@ -30,6 +36,7 @@ void display_symbol_table(Elf64_Ehdr *elf_header, Elf64_Shdr *section_headers, E
 	Elf64_Shdr *string_table_section = &section_headers[symbol_table->sh_link];
 	symtab_strtab_ptr = (char *) elf_header + string_table_section->sh_offset;
 	symbol_array = (Elf64_Sym *) ((char *) elf_header + symbol_table->sh_offset);
+	puts("flag");
 	g_master_node = (t_btree *) malloc(sizeof(t_btree));
 	if (!g_master_node) {
 		perror("Error allocating memory for btree node");
