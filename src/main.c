@@ -1,6 +1,6 @@
 #include <strings.h>
 #include <ctype.h>
-#include "nm.h"
+#include "ft_nm.h"
 
 Elf64_Sym *symbol_array;
 char *symtab_strtab_ptr;

@@ -1,5 +1,5 @@
 #include <ctype.h>
-#include "nm.h"
+#include "ft_nm.h"
 
 void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index);
 
@@ -66,7 +66,7 @@ void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index) {
 		if (symbol_array[index].st_value == 0) {
 			printf("                 %c %s\n", letter, symbol_name);
 		} else {
-			printf("%016llx %c %s\n", symbol_array[index].st_value, letter, symbol_name);
+			printf("%016lx %c %s\n", symbol_array[index].st_value, letter, symbol_name);
 		}
 	}
 }

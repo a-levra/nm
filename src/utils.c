@@ -1,4 +1,4 @@
-#include "nm.h"
+#include "ft_nm.h"
 
 uint32_t get_magic_number_ELF(Elf64_Ehdr *ehdr) {
 	uint32_t magic_number = ehdr->e_ident[EI_MAG0] | ehdr->e_ident[EI_MAG1] << 8 | ehdr->e_ident[EI_MAG2] << 16 | ehdr->e_ident[EI_MAG3] << 24;

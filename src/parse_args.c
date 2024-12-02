@@ -1,4 +1,4 @@
-#include "nm.h"
+#include "ft_nm.h"
 
 char G_FLAGS[5] = {0, 0, 0, 0, 0};
 /* -a flag : display all symbols
