@@ -30,6 +30,8 @@ void display_symbol_table(Elf64_Ehdr *elf_header, Elf64_Shdr *section_headers, E
 	Elf64_Shdr *string_table_section = &section_headers[symbol_table->sh_link];
 	symtab_strtab_ptr = (char *) elf_header + string_table_section->sh_offset;
 	symbol_array = (Elf64_Sym *) ((char *) elf_header + symbol_table->sh_offset);
+	if (G_FLAGS[ALL_SYMBOLS_FLAG])
+		printf("%016d %c \n", 0 , 'a');
 	g_master_node = (t_btree *) malloc(sizeof(t_btree));
 	if (!g_master_node) {
 		perror("Error allocating memory for btree node");
