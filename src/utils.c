@@ -94,22 +94,23 @@ int ft_strncmp(const char *s1, const char *s2, size_t n) {
 int ft_strncmp_custom(const char *s1, const char *s2, size_t n) {
 	unsigned char *p1 = (unsigned char *) s1;
 	unsigned char *p2 = (unsigned char *) s2;
-	size_t n1 = n;
-	size_t n2 = n;
-
-	//skip underscores for s1
-	if (*p1 == '_')
-		while (n1-- && *p1 == '_')
-			++p1;
-
-	//skip underscores for s2
-	if (*p2 == '_')
-		while (n2-- && *p2 == '_')
-			++p2;
-
-	n = (n1 < n2 ? n1 : n2);
+	size_t n1;
+	size_t n2;
 
 	while (n--) {
+		n1 = n;
+		n2 = n;
+		//skip underscores for s1
+		if (*p1 == '_')
+			while (n1-- && *p1 == '_')
+				++p1;
+
+		//skip underscores for s2
+		if (*p2 == '_')
+			while (n2-- && *p2 == '_')
+				++p2;
+
+		n = (n1 < n2 ? n1 : n2);
 
 		//ignore case
 		char tolower_p1 = 0;
@@ -120,7 +121,7 @@ int ft_strncmp_custom(const char *s1, const char *s2, size_t n) {
 		if (*p2 >= 'A' && *p2 <= 'Z')
 			tolower_p2 = 'A' - 'a';
 
-		if ((*p1 - tolower_p1)!= (*p2 - tolower_p2)) {
+		if ((*p1 - tolower_p1) != (*p2 - tolower_p2)) {
 			return (*p1 - tolower_p1) - (*p2 - tolower_p2);
 		}
 		if (*p1 == '\0') {
