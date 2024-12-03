@@ -33,7 +33,10 @@ void check_flags(int argc, char **argv) {
 			}
 		}
 	}
-
+	if (G_FLAGS[ONLY_UNDIFINED_SYMBOLS_FLAG] == 1)
+		G_FLAGS[ONLY_GLOBAL_SYMBOLS_FLAG] = 0;
+	if (G_FLAGS[ONLY_GLOBAL_SYMBOLS_FLAG] == 1)
+		G_FLAGS[ALL_SYMBOLS_FLAG] = 0;
 }
 
 void check_flag_conformity(int argc, char **argv) {
