@@ -63,10 +63,10 @@ void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index) {
 	char *symbol_name = symtab_strtab_ptr + symbol_array[index].st_name;
 	unsigned char letter = get_symbol_letter(symbol_array[index], section_headers);
 	if (!should_skip_symbol(symbol_name, symbol_array[index])) {
-		if (symbol_array[index].st_value == 0) {
+		if (symbol_array[index].st_value == 0 &&( letter == 'w' || letter == 'U')) {
 			printf("                 %c %s\n", letter, symbol_name);
 		} else {
-			printf("%016lx %c %s\n", symbol_array[index].st_value, letter, symbol_name);
+			printf("%016lx %c %s\n", (unsigned long) symbol_array[index].st_value, letter, symbol_name);
 		}
 	}
 }
@@ -154,7 +154,7 @@ unsigned char get_symbol_letter(Elf64_Sym symbol, Elf64_Shdr *section_headers) {
 		letter = 'R';
 	}
 	if (bind == STB_LOCAL && letter != '?') {
-		letter = tolower(letter);
+		letter -= 'A' - 'a';
 	}
 	return letter;
 }

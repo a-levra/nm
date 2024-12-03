@@ -79,6 +79,3 @@ void check_symtab_integrity(const Elf64_Ehdr *elf_header,
 		unmap_file_and_exit_with_failure((void *) elf_header, sizeof(Elf64_Ehdr));
 	}
 }
-
-// todo get some test binaries
-//todo make a Makefile

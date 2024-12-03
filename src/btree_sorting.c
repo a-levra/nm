@@ -34,7 +34,8 @@ void free_btrees(t_btree *node) {
 int compare_symtab_entries(unsigned long long index1, unsigned long long index2) {
 	const char *name1 = symtab_strtab_ptr + symbol_array[index1].st_name;
 	const char *name2 = symtab_strtab_ptr + symbol_array[index2].st_name;
-	return ft_strncmp(name1, name2, 100) * (G_FLAGS[REVERSE_ORDER_FLAG] ? -1 : 1);
+
+	return ft_strncmp_custom(name1, name2, 100) * (G_FLAGS[REVERSE_ORDER_FLAG] ? -1 : 1);
 }
 
 void cmp_and_insert_in_btree(unsigned long long sym_entry_index, t_btree *node) {

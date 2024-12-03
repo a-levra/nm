@@ -67,6 +67,7 @@ void unmap_file_and_exit_with_failure(void *p_void, off_t size);
 // utils
 void ft_bzero(void *s, size_t n);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
+int ft_strncmp_custom(const char *s1, const char *s2, size_t n);
 size_t ft_strlen(const char *s);
 
 #endif //UNTITLED__NM_H_
