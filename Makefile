@@ -19,6 +19,8 @@ SRC =	btree_sorting.c \
         name_mangling.c \
         parse_args.c \
         utils.c \
+        ft_nm32.c \
+        ft_nm64.c \
 
 FLAGS = -Wall -Wextra -Werror
 FSAN = -fsanitize=address

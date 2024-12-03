@@ -3,14 +3,11 @@
 
 void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index);
 
-void name_mangling(void *binary_pointer) {
-	Elf64_Ehdr *elf_header = (Elf64_Ehdr *) binary_pointer;
-	Elf64_Shdr *section_headers_table = get_section_headers_table(elf_header);
-	check_section_headers_table_integrity(elf_header, section_headers_table);
-	Elf64_Shdr *symbol_table = get_symbol_table(section_headers_table, elf_header);
+Elf64_Shdr *get_symbol_table(Elf64_Shdr *section_headers, Elf64_Ehdr *elf_header);
 
-	check_symtab_integrity(elf_header, section_headers_table, symbol_table);
-	display_symbol_table(elf_header, section_headers_table, symbol_table);
+Elf64_Shdr *get_symbol_table(Elf64_Shdr *section_headers, Elf64_Ehdr *elf_header)
+{
+return find_section_by_type(section_headers, elf_header->e_shnum, SHT_SYMTAB);
 }
 
 void check_section_headers_table_integrity(Elf64_Ehdr *ELF_header, Elf64_Shdr *section_header_table) {

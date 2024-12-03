@@ -40,6 +40,7 @@ void map_file_to_memory(int fd, struct stat *st, void **ptr);
 void check_flags(int argc, char **argv);
 
 //global nm
+void ft_nm64( void* ptr_to_bin, long long size_of_bin );
 void name_mangling(void *ptr_to_bin);
 void verify_magic_number(uint32_t magic_number);
 uint32_t get_magic_number_ELF(Elf64_Ehdr *ehdr);
