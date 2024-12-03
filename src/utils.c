@@ -141,15 +141,31 @@ size_t ft_strlen(const char *s) {
 	return len;
 }
 
-char* ft_strrchr(const char *s_origin, int c){
-	char *s = (char *)s_origin;
-	char *start = s;
-	while(*s && *s != c)
-		s++;
-	if (!*s)
-		return start;
+char	*ft_strrchr(const char *s, int c)
+{
+	size_t	i;
+	char	char_c;
+	int		res;
+
+	char_c = (char)c;
+	res = -1;
+	i = 0;
+	if (char_c == '\0')
+	{
+		while (s[i])
+			i++;
+		return ((char *)s + i);
+	}
+	while (s[i])
+	{
+		if (s[i] == char_c)
+			res = i;
+		i++;
+	}
+	if (res == -1)
+		return (NULL);
 	else
-		return ft_strrchr(s, c);
+		return ((char *)s + res);
 }
 
 void error(char *message){
