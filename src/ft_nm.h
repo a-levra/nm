@@ -21,15 +21,17 @@ typedef struct s_btree {
 } t_btree;
 extern t_btree *g_master_node;
 
+
 /* sym_array is the symbol table
  * in a format of an array of Elf64_Sym */
 extern Elf64_Sym *symbol_array;
 /* symtab_strtab_p is a ptr to the string table of the symbol table */
 extern char *symtab_strtab_ptr;
+extern char *file_name;
 
-//init routine undi
-extern char G_FLAGS[5];
-enum FLAGS {ALL_SYMBOLS_FLAG, ONLY_GLOBAL_SYMBOLS_FLAG, ONLY_UNDIFINED_SYMBOLS_FLAG, REVERSE_ORDER_FLAG, NO_SORT_FLAG};
+
+extern char G_FLAGS[6];
+enum FLAGS {ALL_SYMBOLS_FLAG, ONLY_GLOBAL_SYMBOLS_FLAG, ONLY_UNDIFINED_SYMBOLS_FLAG, REVERSE_ORDER_FLAG, NO_SORT_FLAG, DEBUG_FLAG};
 
 void check_arguments(int argc, char **argv);
 int open_file(char *string);
@@ -52,6 +54,7 @@ void check_symtab_integrity(const Elf64_Ehdr *elf_header,
 							const Elf64_Shdr *section_headers,
 							const Elf64_Shdr *symbol_table);
 void check_section_headers_table_integrity(Elf64_Ehdr *ELF_header, Elf64_Shdr *section_header_table);
+void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index);
 
 //custom btree
 void create_node(t_btree **p_btree);
@@ -69,5 +72,8 @@ void ft_bzero(void *s, size_t n);
 int ft_strncmp(const char *s1, const char *s2, size_t n);
 int ft_strncmp_custom(const char *s1, const char *s2, size_t n);
 size_t ft_strlen(const char *s);
+char* ft_strrchr(const char *s_origin, int c);
+void error(char *message);
+char	*ft_strdup(const char *str);
 
 #endif //UNTITLED__NM_H_

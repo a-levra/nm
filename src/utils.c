@@ -141,3 +141,39 @@ size_t ft_strlen(const char *s) {
 	return len;
 }
 
+char* ft_strrchr(const char *s_origin, int c){
+	char *s = (char *)s_origin;
+	char *start = s;
+	while(*s && *s != c)
+		s++;
+	if (!*s)
+		return start;
+	else
+		return ft_strrchr(s, c);
+}
+
+void error(char *message){
+	fprintf(stderr, "ft_nm: %s: ", file_name);
+	if (G_FLAGS[DEBUG_FLAG])
+		fprintf(stderr, "%s\n", message);
+	else
+		fprintf(stderr, "file format not recognized\n");
+}
+
+char	*ft_strdup(const char *str)
+{
+	char	*new;
+	size_t	i;
+
+	new = malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	new[i] = 0;
+	return (new);
+}

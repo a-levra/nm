@@ -1,6 +1,6 @@
 #include "ft_nm.h"
 
-char G_FLAGS[5] = {0, 0, 0, 0, 0};
+char G_FLAGS[6] = {0, 0, 0, 0, 0, 0};
 /* -a flag : display all symbols
  * -g flag : display only global symbols
  * -u flag : display only undefined symbols
@@ -25,6 +25,8 @@ void check_flags(int argc, char **argv) {
 					case 'r': G_FLAGS[REVERSE_ORDER_FLAG] = 1;
 						break;
 					case 'p': G_FLAGS[NO_SORT_FLAG] = 1;
+						break;
+					case 'd': G_FLAGS[DEBUG_FLAG] = 1;
 						break;
 					default: printf("Error: flag %c not recognized\n", argv[i][1]);
 						exit(EXIT_FAILURE);
