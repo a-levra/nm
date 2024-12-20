@@ -2,7 +2,8 @@
 #include <ctype.h>
 #include "ft_nm.h"
 
-Elf64_Sym *symbol_array;
+Elf64_Sym *symbol_array64;
+Elf32_Sym *symbol_array32;
 char *symtab_strtab_ptr;
 char *file_name;
 

@@ -64,10 +64,6 @@ void check_arguments(int argc, char **argv) {
 	check_flags(argc, argv);
 }
 
-Elf64_Shdr *get_section_headers_table(Elf64_Ehdr *elf_header) {
-	return (Elf64_Shdr *) ((char *) elf_header + elf_header->e_shoff);
-}
-
 void ft_bzero(void *s, size_t n) {
 	unsigned char *p = s;
 	while (n--)

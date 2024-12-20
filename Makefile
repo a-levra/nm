@@ -16,7 +16,6 @@ HEADER = $(NAME).h
 
 SRC =	btree_sorting.c \
         main.c \
-        name_mangling.c \
         parse_args.c \
         utils.c \
         ft_nm32.c \
@@ -27,6 +26,7 @@ FSAN = -fsanitize=address
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
 all	: create_obj_folder
+	sed 's/64/32/g' src/ft_nm64.c > src/ft_nm32.c
 	make $(NAME)
 	@make end_message
 
