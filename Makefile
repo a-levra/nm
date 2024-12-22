@@ -26,14 +26,16 @@ FSAN = -fsanitize=address
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
 all	: create_obj_folder
-	sed 's/64/32/g' src/ft_nm64.c > src/ft_nm32.c
 	make $(NAME)
 	@make end_message
+
+src/ft_nm32.c: src/ft_nm64.c
+	sed 's/64/32/g' src/ft_nm64.c > src/ft_nm32.c
 
 obj/%.o : src/%.c src/$(HEADER) Makefile
 	cc -c -g3 ${FLAGS} $(FSAN) $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): src/ft_nm32.c $(OBJ)
 	cc $(OBJ) $(FSAN) -g3 -o $(NAME)
 
 create_obj_folder :
@@ -59,4 +61,4 @@ test:
 	@mkdir -p test_res
 	./launch_test
 
-.PHONY: all clean fclean re create_obj_folder end_message test
+.PHONY: all clean fclean re create_obj_folder end_message test create_nm32
