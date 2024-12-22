@@ -12,6 +12,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <strings.h>
+#include <stdbool.h>
 #include "elf.h"
 
 typedef struct s_btree {
@@ -26,6 +27,8 @@ extern t_btree *g_master_node;
  * in a format of an array of Elf64_Sym */
 extern Elf64_Sym *symbol_array64;
 extern Elf32_Sym *symbol_array32;
+// is32 is a flag to indicate if the binary is 32 or 64 bits
+extern bool is32;
 /* symtab_strtab_p is a ptr to the string table of the symbol table */
 extern char *symtab_strtab_ptr;
 extern char *file_name;
@@ -42,6 +45,7 @@ void check_flags(int argc, char **argv);
 
 //global nm
 void ft_nm64( void* ptr_to_bin, long long size_of_bin );
+void ft_nm32( void* ptr_to_bin, long long size_of_bin );
 
 void verify_magic_number(uint32_t magic_number);
 uint32_t get_magic_number_ELF(Elf64_Ehdr *ehdr); //this is cross architecture

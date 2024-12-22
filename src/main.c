@@ -4,6 +4,7 @@
 
 Elf64_Sym *symbol_array64;
 Elf32_Sym *symbol_array32;
+bool is32 = false;
 char *symtab_strtab_ptr;
 char *file_name;
 
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
 	close(file_descriptor);
 	verify_magic_number(get_magic_number_ELF((Elf64_Ehdr *) ptr_to_binary));
 	if (is32bits(ptr_to_binary))
-		return 0; //ft_nm32(ptr_to_binary, file_stat.st_size);
+		ft_nm32(ptr_to_binary, file_stat.st_size);
 	else
 		ft_nm64(ptr_to_binary, file_stat.st_size);
 
@@ -33,7 +34,11 @@ int main(int argc, char **argv) {
 
 int is32bits(void *ptr_to_bin) {
 	Elf64_Ehdr *elf_header = (Elf64_Ehdr *) ptr_to_bin;
-	return elf_header->e_ident[EI_CLASS] == ELFCLASS32;
+	if (elf_header->e_ident[EI_CLASS] == ELFCLASS32) {
+		is32 = true;
+		return 1;
+	}
+	return 0;
 }
 
 //void ft_nm32( void* ptr_to_bin, long long size_of_bin ){
