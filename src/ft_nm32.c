@@ -44,7 +44,7 @@ void check_section_headers_table_integrity(Elf32_Ehdr *ELF_header, Elf32_Shdr *s
 void display_symbol_table(Elf32_Ehdr *elf_header, Elf32_Shdr *section_headers, Elf32_Shdr *symbol_table) {
 	Elf32_Shdr *string_table_section = &section_headers[symbol_table->sh_link];
 	symtab_strtab_ptr = (char *) elf_header + string_table_section->sh_offset;
-		symbol_array32 = (Elf32_Sym *) ((char *) elf_header + symbol_table->sh_offset);
+	symbol_array32 = (Elf32_Sym *) ((char *) elf_header + symbol_table->sh_offset);
 	if (G_FLAGS[ALL_SYMBOLS_FLAG])
 		printf("%016d %c \n", 0 , 'a');
 	g_master_node = (t_btree *) malloc(sizeof(t_btree));
@@ -81,9 +81,15 @@ void print_symbol(Elf32_Shdr *section_headers, unsigned long long int index) {
 	unsigned char letter = get_symbol_letter(symbol_array32[index], section_headers);
 	if (!should_skip_symbol(symbol_name, symbol_array32[index])) {
 		if (symbol_array32[index].st_value == 0 &&( letter == 'w' || letter == 'U')) {
-			printf("                 %c %s\n", letter, symbol_name);
+			if (is32)
+				printf("         %c %s\n", letter, symbol_name);
+			else
+				printf("                 %c %s\n", letter, symbol_name);
 		} else {
-			printf("%016lx %c %s\n", (unsigned long) symbol_array32[index].st_value, letter, symbol_name);
+			if (is32)
+				printf("%08lx %c %s\n", (unsigned long) symbol_array32[index].st_value, letter, symbol_name);
+			else
+				printf("%016lx %c %s\n", (unsigned long) symbol_array32[index].st_value, letter, symbol_name);
 		}
 	}
 }

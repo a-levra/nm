@@ -81,9 +81,15 @@ void print_symbol(Elf64_Shdr *section_headers, unsigned long long int index) {
 	unsigned char letter = get_symbol_letter(symbol_array64[index], section_headers);
 	if (!should_skip_symbol(symbol_name, symbol_array64[index])) {
 		if (symbol_array64[index].st_value == 0 &&( letter == 'w' || letter == 'U')) {
-			printf("                 %c %s\n", letter, symbol_name);
+			if (is32)
+				printf("         %c %s\n", letter, symbol_name);
+			else
+				printf("                 %c %s\n", letter, symbol_name);
 		} else {
-			printf("%016lx %c %s\n", (unsigned long) symbol_array64[index].st_value, letter, symbol_name);
+			if (is32)
+				printf("%08lx %c %s\n", (unsigned long) symbol_array32[index].st_value, letter, symbol_name);
+			else
+				printf("%016lx %c %s\n", (unsigned long) symbol_array64[index].st_value, letter, symbol_name);
 		}
 	}
 }
